@@ -1,0 +1,36 @@
+import React from "react";
+import { useSelector } from "react-redux";
+import Navbar from "../components/Navbar";
+import { selectUser } from "../features/userSlice";
+import { auth } from "../firebase";
+import "./ProfileScreen.css";
+
+function ProfileScreen() {
+  const user = useSelector(selectUser);
+  return (
+    <div className="profileScreen">
+      <Navbar />
+      <div className="profileScreen_body">
+        <h1>Edit profile</h1>
+        <div className="profileScreen_info">
+          <img src="http://www.sewa.gov.ae/register.png" alt="Avatar logo" />
+          <div className="profileScreen_details">
+            <h2>{user.email}</h2>
+            <div className="profileScreen_plans">
+              <h3>Plans (Current Plan: premium)</h3>
+              <h2>Renewal date: 11/11/2023</h2>
+              <button
+                onClick={() => auth.signOut()}
+                className="profileScreen_signOut"
+              >
+                Sign Out
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default ProfileScreen;
