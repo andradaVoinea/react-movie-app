@@ -36,8 +36,23 @@ function Row({ title, fetchUrl, isLargeRow = false }) {
       setTrailerUrl("");
     } else {
       //try and find an youtube trailer according to name
-      movieTrailer(movie?.name || "")
+      movieTrailer(
+        movie?.title ||
+          movie?.name ||
+          movie?.original_name ||
+          movie?.original_title ||
+          ""
+      )
         .then((url) => {
+          console.log(
+            movie?.title ||
+              movie?.name ||
+              movie?.original_name ||
+              movie?.original_title ||
+              ""
+          );
+          console.log(movie);
+          console.log(url);
           const urlParams = new URLSearchParams(new URL(url).search);
           setTrailerUrl(urlParams.get("v"));
         })
