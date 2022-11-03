@@ -12,7 +12,6 @@ function Navbar() {
   };
 
   const handleClickMain = () => {
-    // 👇️ navigate programmatically
     navigate("/");
   };
 
