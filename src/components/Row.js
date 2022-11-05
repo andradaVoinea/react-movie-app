@@ -44,6 +44,18 @@ function Row({ title, fetchUrl, isLargeRow = false }) {
           ""
       )
         .then((url) => {
+          if (url == null) {
+            return movieTrailer(
+              movie?.title ||
+                movie?.name ||
+                movie?.original_name ||
+                movie?.original_title ||
+                "", {videoType: "tv"}
+            )
+          }
+          else return url
+        })
+        .then((url) => {
           console.log(
             movie?.title ||
               movie?.name ||
