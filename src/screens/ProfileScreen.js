@@ -5,6 +5,7 @@ import Navbar from "../components/Navbar";
 import { selectUser } from "../features/userSlice";
 import { auth } from "../firebase";
 import "./ProfileScreen.css";
+import avatar from "../assets/avatar.png";
 
 function ProfileScreen() {
   const user = useSelector(selectUser);
@@ -18,7 +19,7 @@ function ProfileScreen() {
       <div className="profileScreen_body">
         <h1>Edit profile</h1>
         <div className="profileScreen_info">
-          <img src="http://www.sewa.gov.ae/register.png" alt="Avatar logo" />
+          <img src={avatar} alt="Avatar logo" />
           <div className="profileScreen_details">
             <h2>{user.email}</h2>
             <div className="profileScreen_plans">
@@ -36,7 +37,6 @@ function ProfileScreen() {
               >
                 Sign Out
               </button>
-
             </div>
           </div>
         </div>
