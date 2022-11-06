@@ -10,11 +10,16 @@ import "./Banner.css";
 function Banner() {
   const [movie, setMovie] = useState([]);
   const [trailerUrl, setTrailerUrl] = useState("");
-  const [{ items }, setItems] = useState({ items: [] });
-  const addItem = () => {
-    items.push(<div>First air date: {movie?.first_air_date}</div>);
-    setItems({ items: [items] });
+  const [isHovering, setIsHovering] = useState(false);
+
+  const handleMouseOver = () => {
+    setIsHovering(true);
   };
+
+  const handleMouseOut = () => {
+    setIsHovering(false);
+  };
+
   const opts = {
     height: "390",
     width: "100%",
@@ -23,6 +28,7 @@ function Banner() {
       autoplay: 1,
     },
   };
+
   useEffect(() => {
     //piece of code that runs on a specific condition
     async function fetchData() {
@@ -74,18 +80,28 @@ function Banner() {
         <div className="banner_buttons">
           <button className="banner_button" onClick={() => playTrailer(movie)}>
             Play
-            <FaPlay />
+            <span>
+              <FaPlay />
+            </span>
           </button>
           <button
+            onMouseOver={handleMouseOver}
+            onMouseOut={handleMouseOut}
             className="banner_button"
-            onClick={addItem}
-            // onClick={
-            //
-            // }
           >
-            More info <AiOutlineInfoCircle />
+            More info{" "}
+            <span>
+              <AiOutlineInfoCircle />{" "}
+            </span>
           </button>
-          {items}
+          {isHovering && (
+            <div className="banner_hoverInfo">
+              <div>First air date: {movie?.first_air_date}</div>
+              <div> Popularity score: {movie?.popularity}</div>
+              <div> User score: {movie?.vote_average}</div>
+              <div> Vote count/day: {movie?.vote_count}</div>
+            </div>
+          )}
         </div>
         <h1 className="banner_description">{truncate(movie?.overview, 150)}</h1>
       </div>
