@@ -10,7 +10,11 @@ import "./Banner.css";
 function Banner() {
   const [movie, setMovie] = useState([]);
   const [trailerUrl, setTrailerUrl] = useState("");
-
+  const [{ items }, setItems] = useState({ items: [] });
+  const addItem = () => {
+    items.push(<div>First air date: {movie?.first_air_date}</div>);
+    setItems({ items: [items] });
+  };
   const opts = {
     height: "390",
     width: "100%",
@@ -69,20 +73,19 @@ function Banner() {
         </h1>
         <div className="banner_buttons">
           <button className="banner_button" onClick={() => playTrailer(movie)}>
-            Play 
+            Play
             <FaPlay />
           </button>
           <button
             className="banner_button"
+            onClick={addItem}
             // onClick={
-            //   movie?.first_air_date &&
-            //   movie?.popularity &&
-            //   movie?.vote_average &&
-            //   movie?.vote_count
+            //
             // }
           >
             More info <AiOutlineInfoCircle />
           </button>
+          {items}
         </div>
         <h1 className="banner_description">{truncate(movie?.overview, 150)}</h1>
       </div>
