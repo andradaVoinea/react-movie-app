@@ -3,7 +3,7 @@ import { useEffectOnce } from "../customHooks/customHooks";
 import axios from "../apicalls/axios";
 import "./Row.css";
 import YouTube from "react-youtube";
-import movieTrailer from "movie-trailer";
+import { getTrailerUrlParams } from "../apicalls/trailerUrlParams";
 
 function Row({ title, fetchUrl, isLargeRow = false }) {
   const [movies, setMovies] = useState([]);
@@ -30,45 +30,17 @@ function Row({ title, fetchUrl, isLargeRow = false }) {
     },
   };
 
-  const handleClick = (movie) => {
+  const handleClick = async (movie) => {
     if (trailerUrl) {
       // if there is an open trailer, then I want to close it (set it to empty "")
       setTrailerUrl("");
     } else {
-      //try and find an youtube trailer according to name
-      movieTrailer(
-        movie?.title ||
-          movie?.name ||
-          movie?.original_name ||
-          movie?.original_title ||
-          ""
-      )
-        .then((url) => {
-          if (url == null) {
-            return movieTrailer(
-              movie?.title ||
-                movie?.name ||
-                movie?.original_name ||
-                movie?.original_title ||
-                "", {videoType: "tv"}
-            )
-          }
-          else return url
-        })
-        .then((url) => {
-          console.log(
-            movie?.title ||
-              movie?.name ||
-              movie?.original_name ||
-              movie?.original_title ||
-              ""
-          );
-          console.log(movie);
-          console.log(url);
-          const urlParams = new URLSearchParams(new URL(url).search);
-          setTrailerUrl(urlParams.get("v"));
-        })
-        .catch((error) => console.log(error));
+      try {
+        const urlParams = await getTrailerUrlParams(movie);
+        setTrailerUrl(urlParams.get("v"));
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
