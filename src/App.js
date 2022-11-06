@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import LoginScreen from "./screens/LoginScreen";
 import { auth } from "./firebase";
 import { useDispatch, useSelector } from "react-redux";
-import { login, logout, selectUser } from "./features/userSlice";
+import { login, logout, selectUser } from "./redux/userSlice";
 import ProfileScreen from "./screens/ProfileScreen";
 
 function App() {

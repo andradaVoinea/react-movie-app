@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
-import { selectUser } from "../features/userSlice";
+import { selectUser } from "../redux/userSlice";
 import { auth } from "../firebase";
 import "./ProfileScreen.css";
 import avatar from "../assets/avatar.png";
