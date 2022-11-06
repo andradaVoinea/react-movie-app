@@ -3,6 +3,8 @@ import { getTrailerUrlParams } from "../apicalls/trailerUrlParams";
 import axios from "../apicalls/axios";
 import requests from "../apicalls/request";
 import YouTube from "react-youtube";
+import { FaPlay } from "react-icons/fa";
+import { AiOutlineInfoCircle } from "react-icons/ai";
 import "./Banner.css";
 
 function Banner() {
@@ -67,9 +69,20 @@ function Banner() {
         </h1>
         <div className="banner_buttons">
           <button className="banner_button" onClick={() => playTrailer(movie)}>
-            Play
+            Play 
+            <FaPlay />
           </button>
-          <button className="banner_button">My List</button>
+          <button
+            className="banner_button"
+            // onClick={
+            //   movie?.first_air_date &&
+            //   movie?.popularity &&
+            //   movie?.vote_average &&
+            //   movie?.vote_count
+            // }
+          >
+            More info <AiOutlineInfoCircle />
+          </button>
         </div>
         <h1 className="banner_description">{truncate(movie?.overview, 150)}</h1>
       </div>
