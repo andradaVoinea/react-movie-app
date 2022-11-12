@@ -1,6 +1,7 @@
 .banner {
   position: relative;
   color: white;
+  /* contain - so that it doesn't strench beside what we have inside */
   object-fit: contain;
   height: 448px;
 }
@@ -69,5 +70,6 @@
 
 span {
   margin: 5px;
+  /* because I wanted the span elements to be in-line, to also act like a block and be able to distance them */
   display: inline-block;
 }

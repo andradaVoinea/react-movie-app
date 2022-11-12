@@ -8,6 +8,7 @@ import { AiOutlineInfoCircle } from "react-icons/ai";
 import "./Banner.css";
 
 function Banner() {
+  //fetch a movie from the TMDB, store it and use it in the banner section
   const [movie, setMovie] = useState([]);
   const [trailerUrl, setTrailerUrl] = useState("");
   const [isHovering, setIsHovering] = useState(false);
@@ -20,6 +21,7 @@ function Banner() {
     setIsHovering(false);
   };
 
+  //how to display the trailer
   const opts = {
     height: "390",
     width: "100%",
@@ -44,6 +46,8 @@ function Banner() {
   }, []); //empty array it means it runs once, when the Banner component mounts
   console.log(movie);
 
+  //if text is longer than n characters (150 characters), replace remaining text with "..."
+  //the "?" is in case you get an udenfined answer from the API call
   function truncate(string, n) {
     return string?.length > n ? string.substr(0, n - 1) + "..." : string;
   }
@@ -75,7 +79,10 @@ function Banner() {
         {/* title */}
         {/* optional chaining */}
         <h1 className="banner_title">
-          {movie?.title || movie?.name || movie?.original_name}
+          {movie?.title ||
+            movie?.name ||
+            movie?.original_name ||
+            movie?.original_title}
         </h1>
         <div className="banner_buttons">
           <button className="banner_button" onClick={() => playTrailer(movie)}>
@@ -106,7 +113,10 @@ function Banner() {
         <h1 className="banner_description">{truncate(movie?.overview, 150)}</h1>
       </div>
       <div className="banner-fadeBottom" />
-      <div>{trailerUrl && <YouTube videoId={trailerUrl} opts={opts} />}</div>
+      <div>
+        {/* where to display the trailer */}
+        {trailerUrl && <YouTube videoId={trailerUrl} opts={opts} />}
+      </div>
     </header>
   );
 }
