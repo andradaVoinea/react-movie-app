@@ -10,7 +10,6 @@ function Row({ title, fetchUrl, isLargeRow = false }) {
   const [trailerUrl, setTrailerUrl] = useState("");
   const base_url = "https://image.tmdb.org/t/p/original/";
 
-  //a snippet of code which runs on a specific condition/variable
   //when this row loads we make a request to tmdb and pull the movie information
   useEffectOnce(() => {
     async function fetchData() {
@@ -35,6 +34,7 @@ function Row({ title, fetchUrl, isLargeRow = false }) {
       // if there is an open trailer, then I want to close it (set it to empty "")
       setTrailerUrl("");
     } else {
+      //play trailer
       try {
         const urlParams = await getTrailerUrlParams(movie);
         setTrailerUrl(urlParams.get("v"));
