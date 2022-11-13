@@ -5,7 +5,7 @@ import "./SignupScreen.css";
 
 function SignupScreen() {
   //capture what is written in the email and pass fields
-  const emailRef = useRef(null);
+  const emailRef = useRef(null); //then attach them to the coresponding input
   const passwordRef = useRef(null);
   //in order not to do a typical refresh - any time a button is inside a form, it will refresh
   const register = (e) => {
@@ -33,7 +33,6 @@ function SignupScreen() {
         passwordRef.current.value
       )
       .then((authUser) => {
-        //log them in and give me some credentials for that user
         console.log(authUser);
       })
       .catch((error) => {

@@ -13,8 +13,8 @@ const firebaseConfig = {
 };
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
-const db = firebaseApp.firestore();
+const db = firebaseApp.firestore(); //the database that I'll be using and keeps track of the user subscription
 const auth = firebase.auth();
 
-export { auth };
+export { auth }; //explicit export
 export default db;

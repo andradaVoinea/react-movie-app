@@ -11,12 +11,15 @@ import ProfileScreen from "./screens/ProfileScreen";
 function App() {
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
-  //listen to the users's login, store it in the browser and remember you are logged in
+  //persistence - listen to the users's login, store it in the browser and remember you are logged in
   useEffect(() => {
+    //clean-up function
     const unsubscribe = auth.onAuthStateChanged((userAuth) => {
       if (userAuth) {
         //is logged in
+        //to manipulate the state you dispatch a login/logout action
         dispatch(
+          //push the user into the store
           login({
             uid: userAuth.uid,
             email: userAuth.email,

@@ -6,8 +6,9 @@ import avatar from "../assets/avatar.png";
 
 function Navbar() {
   //add scroll listener
-  const [show, handleShow] = useState(false);
   //useSatet hook - the easy way of defining a variable inside React - knows when to re-render
+  const [show, handleShow] = useState(false);
+
   const navigate = useNavigate();
 
   const handleClickProfile = () => {

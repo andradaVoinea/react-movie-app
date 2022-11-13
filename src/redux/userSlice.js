@@ -15,6 +15,6 @@ export const userSlice = createSlice({
   },
 });
 
-export const { login, logout } = userSlice.actions;
-export const selectUser = (state) => state.user.user;
+export const { login, logout } = userSlice.actions; //push actions into the user store with dispatch
+export const selectUser = (state) => state.user.user; //create a selector to get info out of the user store
 export default userSlice.reducer;
