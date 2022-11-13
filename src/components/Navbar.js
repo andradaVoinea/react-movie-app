@@ -8,7 +8,6 @@ function Navbar() {
   //add scroll listener
   //useSatet hook - the easy way of defining a variable inside React - knows when to re-render
   const [show, handleShow] = useState(false);
-
   const navigate = useNavigate();
 
   const handleClickProfile = () => {

@@ -31,7 +31,7 @@ function App() {
       }
     });
     return unsubscribe; //clean-up in order to not affect performance. If the component is ever to unmount we don't want to duplicate another listener, we want to detach the old one and attach a new one
-  }, [dispatch]);
+  }, [dispatch]); // the use effect is dependent on the dispatch method, it need to run this and double-check, everytime we have a dispatch
   return (
     <div className="app">
       <Router>
