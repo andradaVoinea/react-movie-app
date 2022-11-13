@@ -3,82 +3,60 @@ import { useEffectOnce } from "../customHooks/customHooks";
 import axios from "../apicalls/axios";
 import "./Row.css";
 import YouTube from "react-youtube";
-import movieTrailer from "movie-trailer";
+import { getTrailerUrlParams } from "../apicalls/trailerUrlParams";
 
 function Row({ title, fetchUrl, isLargeRow = false }) {
+  //a state to keep track of the movies
   const [movies, setMovies] = useState([]);
+  //a state that gets the trailerUrl
   const [trailerUrl, setTrailerUrl] = useState("");
   const base_url = "https://image.tmdb.org/t/p/original/";
 
-  //a snippet of code which runs on a specific condition/variable
   //when this row loads we make a request to tmdb and pull the movie information
   useEffectOnce(() => {
     async function fetchData() {
       const request = await axios.get(fetchUrl);
       setMovies(request.data.results);
-      return request;
+      return request; //with any promise we need to return something
     }
     fetchData();
   }, [fetchUrl]); //if you use an outside variable you have to include it in useEffect -> dependencies
 
+  //options from the documentation of react-youtube
   const opts = {
     height: "390",
     width: "100%",
     playerVars: {
       // https://developers.google.com/youtube/player_parameters
-      autoplay: 1,
+      autoplay: 1, //autoplay when it loads in
     },
   };
 
-  const handleClick = (movie) => {
+  //play trailer when you click on the picture
+  const handleClick = async (movie) => {
     if (trailerUrl) {
       // if there is an open trailer, then I want to close it (set it to empty "")
       setTrailerUrl("");
     } else {
-      //try and find an youtube trailer according to name
-      movieTrailer(
-        movie?.title ||
-          movie?.name ||
-          movie?.original_name ||
-          movie?.original_title ||
-          ""
-      )
-        .then((url) => {
-          if (url == null) {
-            return movieTrailer(
-              movie?.title ||
-                movie?.name ||
-                movie?.original_name ||
-                movie?.original_title ||
-                "", {videoType: "tv"}
-            )
-          }
-          else return url
-        })
-        .then((url) => {
-          console.log(
-            movie?.title ||
-              movie?.name ||
-              movie?.original_name ||
-              movie?.original_title ||
-              ""
-          );
-          console.log(movie);
-          console.log(url);
-          const urlParams = new URLSearchParams(new URL(url).search);
-          setTrailerUrl(urlParams.get("v"));
-        })
-        .catch((error) => console.log(error));
+      //play trailer
+      try {
+        const urlParams = await getTrailerUrlParams(movie);
+        setTrailerUrl(urlParams.get("v")); //it's gonna give us everything that is after v in the URL
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
   return (
     <div className="row">
+      {/* props destructured from Row in HomeScreen */}
       <h2>{title}</h2>
       <div className="row_posters">
-        {/* several row_posters */}
+        {/* render several row_posters */}
         {movies.map(
           (movie) =>
+            //fix dead links for images -> only render that image which meets the following conditions
             ((isLargeRow && movie.poster_path) ||
               (!isLargeRow && movie.backdrop_path)) && (
               <img
@@ -93,6 +71,8 @@ function Row({ title, fetchUrl, isLargeRow = false }) {
             )
         )}
       </div>
+      {/* display trailer underneath a row */}
+      {/* when we have a trailerUrl then display the youtube video */}
       {trailerUrl && <YouTube videoId={trailerUrl} opts={opts} />}
     </div>
   );
