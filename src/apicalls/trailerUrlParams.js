@@ -4,16 +4,16 @@ const getTrailerUrlParams = async (movie) => {
   let url = null;
   //try and find an youtube trailer according to name
   const res = await movieTrailer(
-    movie?.title ||
-      movie?.name ||
+    movie?.name ||
+      movie?.title ||
       movie?.original_name ||
       movie?.original_title ||
       ""
   );
   if (res == null) {
     url = await movieTrailer(
-      movie?.title ||
-        movie?.name ||
+      movie?.name ||
+        movie?.title ||
         movie?.original_name ||
         movie?.original_title ||
         "",
@@ -23,14 +23,13 @@ const getTrailerUrlParams = async (movie) => {
     url = res;
   }
   console.log(
-    movie?.title ||
-      movie?.name ||
+    movie?.name ||
+      movie?.title ||
       movie?.original_name ||
       movie?.original_title ||
       ""
   );
-  console.log(movie);
-  console.log(url);
+  //get the video id, after the ? in the URL so we can do a get method
   const urlParams = new URLSearchParams(new URL(url).search);
   return urlParams;
 };

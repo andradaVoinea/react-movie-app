@@ -44,7 +44,6 @@ function Banner() {
     }
     fetchData();
   }, []); //empty array it means it runs once, when the Banner component mounts
-  console.log(movie);
 
   //if text is longer than n characters (150 characters), replace remaining text with "..."
   //the "?" is in case you get an udenfined answer from the API call
