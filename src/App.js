@@ -32,6 +32,7 @@ function App() {
   return (
     <div className="app">
       <Router>
+        {/* if I don't have a user signed in, I want to render the LoginScreen, otherwise, I want to render the rest of the app */}
         {!user ? (
           <LoginScreen />
         ) : (

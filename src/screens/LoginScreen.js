@@ -41,6 +41,7 @@ function LoginScreen() {
         <div className="loginScreen_gradient"></div>
       </div>
       <div className="loginScreen_body">
+        {/* conditionally render this page on weather I click a button or not */}
         {signIn ? (
           <SignupScreen />
         ) : (
@@ -88,10 +89,10 @@ function LoginScreen() {
                   </button>
                 )}
               </form>
-              <button className="loginScreen_logIn" onClick={handleSignIn}>
-                Sign Up
-              </button>
             </div>
+            <button className="loginScreen_logIn" onClick={handleSignIn}>
+              Sign Up
+            </button>
           </>
         )}
       </div>
