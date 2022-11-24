@@ -1,3 +1,9 @@
+This React project has multiple pages: Home, Login, Signup and Profile (which use Firebase authentication) The sign in will connect to Firebase when a user tries to sign in, and when a user signs up, we will use Firebase auth to store the user in the Firebase auth database. I built this app using React and Redux. I used my knowledge of React (useEffect, useState), JavaScript for using higher order functions such as map, filter, reduce and React-router for navigation!
+
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
