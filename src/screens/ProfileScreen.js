@@ -27,9 +27,9 @@ function ProfileScreen() {
               <h2>Renewal date: 11/11/2023</h2>
               <button
                 onClick={handleClick}
-                className="profileScreen_watchNetflix"
+                className="profileScreen_watchMovies"
               >
-                Watch Netflix
+                Watch MovieApp
               </button>
               <button
                 onClick={() => auth.signOut()}

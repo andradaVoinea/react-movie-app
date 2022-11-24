@@ -41,7 +41,7 @@ function Navbar() {
           onClick={handleClickMain}
           className="nav_logo"
           src={logo}
-          alt="Netflix Logo"
+          alt="App Logo"
         />
         <img
           onClick={handleClickProfile}

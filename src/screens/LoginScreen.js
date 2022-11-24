@@ -9,7 +9,7 @@ function LoginScreen() {
   return (
     <div className="loginScreen">
       <div className="loginScreen_background">
-        <img className="loginScreen_logo" src={logo} alt="Netflix logo" />
+        <img className="loginScreen_logo" src={logo} alt="App logo" />
         <button onClick={() => setSignIn(true)} className="loginScreen_button">
           Sign In
         </button>

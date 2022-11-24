@@ -34,7 +34,7 @@ function Banner() {
   useEffect(() => {
     //piece of code that runs on a specific condition
     async function fetchData() {
-      const request = await axios.get(requests.fetchNetflixOriginals);
+      const request = await axios.get(requests.fetchOriginals);
       setMovie(
         request.data.results[
           Math.floor(Math.random() * request.data.results.length - 1)

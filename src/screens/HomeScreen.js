@@ -10,8 +10,8 @@ function HomeScreen() {
       <Navbar />
       <Banner />
       <Row
-        title="NETFLIX ORIGINALS"
-        fetchUrl={requests.fetchNetflixOriginals}
+        title="ORIGINALS"
+        fetchUrl={requests.fetchOriginals}
         isLargeRow
       />
       <Row title="Trending now" fetchUrl={requests.fetchTrending} />
